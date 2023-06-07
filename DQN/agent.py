@@ -14,7 +14,7 @@ class DQNAgent:
         self.action_size = action_size
         self.memory = deque(maxlen=50_000)
         self.gamma = 0.95
-        self.epsilon = 1.0
+        self.epsilon = 0.4
         self.epsilon_decay = 0.999
         self.epsilon_min = 0.01
         self.learning_rate = 0.0001
@@ -56,11 +56,11 @@ class DQNAgent:
 
             self.model.fit(state, target_f, epochs=1, verbose=0)
 
-        if self.epsilon > self.epsilon_min:
-            self.epsilon *= self.epsilon_decay
+        #if self.epsilon > self.epsilon_min:
+        #    self.epsilon *= self.epsilon_decay
 
     def save_model(self):
-        self.model.save("DQNAgent_v0.h")
+        self.model.save("DQNAgent_v2.h")
 
     def load_model(self):
-        self.model = load_model('DQNAgent_v0.h')
+        self.model = load_model('DQNAgent_v1.h')
