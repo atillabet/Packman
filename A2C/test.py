@@ -4,9 +4,16 @@ import numpy as np
 import gym
 from agent import A2CAgent
 import tensorflow as tf
+import argparse
 
 # Set TensorFlow log level to suppress unnecessary warnings
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
+# Parse command line arguments
+parser = argparse.ArgumentParser(description="A2C Agent for MsPacman")
+parser.add_argument("--input-file", type=str, default=None,
+                    help="File path to load a pre-trained A2C model (default: None)")
+args = parser.parse_args()
 
 # Configure GPU memory growth to avoid memory errors
 physical_devices = tf.config.list_physical_devices("GPU")
