@@ -44,10 +44,12 @@ for i in range(len(moves)):
 
 moves.append(-2)
 
+
 # Function to check if all elements in a deque are the same
 def are_all_elements_same(deque_):
     lst = list(deque_)
     return all(elem == lst[0] for elem in lst)
+
 
 # Start training episodes
 for episode in range(num_episodes):
@@ -91,13 +93,13 @@ for episode in range(num_episodes):
             rewardsss -= 20
 
         # Store the transition in the agent's memory
-        agent.remember(state, action, rewardsss, next_state, done)
+        agent.update_memory(state, action, rewardsss, next_state, done)
         state = next_state
         total_reward += reward
 
         # Perform a replay update if memory size is sufficient
         if len(agent.memory) > batch_size:
-            agent.replay(batch_size)
+            agent.train(batch_size)
 
         if counter % 10 == 0:
             print(" score: ", total_reward, info, action)

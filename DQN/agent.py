@@ -44,7 +44,7 @@ class DQNAgent:
         model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
         return model
 
-    def remember(self, state, action, reward, next_state, done):
+    def update_memory(self, state, action, reward, next_state, done):
         """
         Remember an experience tuple (state, action, reward, next_state, done) in the agent's memory.
 
@@ -79,7 +79,7 @@ class DQNAgent:
 
         return int(action.numpy()[0])
 
-    def replay(self, batch_size):
+    def train(self, batch_size):
         """
         Train the DQN model using experience replay.
 

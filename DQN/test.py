@@ -1,18 +1,7 @@
-import os
 import argparse
-
-# Set TensorFlow environment variable to suppress warning messages
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
-
 import gym
 import numpy as np
 from agent import DQNAgent
-import tensorflow as tf
-from collections import deque
-
-# Configure GPU memory growth
-physical_devices = tf.config.list_physical_devices("GPU")
-tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 # Parse command line arguments
 parser = argparse.ArgumentParser(description="DQN Agent for MsPacman")
