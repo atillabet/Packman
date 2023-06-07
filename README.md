@@ -41,6 +41,6 @@ physical_devices = tf.config.list_physical_devices("GPU")
 tf.config.experimental.set_memory_growth(physical_devices[0], True)
 ````
 
-# libs
+# Libs
 To use this code it's nesesary to install all libs from requirements.txt
 Note: All libs from requirements.txt have verions to work with cuda 1.7.4 if you are using newer veriosn of cuda(or not using it) feel free to update verions of libs.
