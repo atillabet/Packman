@@ -3,7 +3,7 @@ In the game op pacman player controls pacman figure, with goal of scoring as man
 
 To score points player can:
  - eat tabletkas - 50 points
- - kill ghosts - 200 points
+ - kill ghost - 200 points
  - collect dots from map - 10 points
  
  # Enviroment
