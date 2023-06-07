@@ -22,7 +22,7 @@ agent.load_model(args.input_file)
 
 num_episodes = 5000
 
-# Start training episodes
+# Start testing episodes
 for episode in range(num_episodes):
     state = env.reset()
     done = False
