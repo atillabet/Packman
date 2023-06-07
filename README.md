@@ -1,10 +1,10 @@
 # Pacman
-In the game op pacman player controls pacman figure, with goal of scoring as many points as posible, main antagonists are ghosts who are trying to stop player from doing it. Ghosts can capture player by conacting with them. There are four of them. To find with them player can eat one of the 4 "tabletkas", by doing it, player will temporarily gain ability to kill ghost, also by contacting with them, after short period of time ghost will respawn in their starting point. 
+In the game of pacman player controls pacman figure, with goal of collecting as many points as posible, antagonists are ghosts who are trying to stop player from doing it. Ghosts can kill player by conacting with him, player has 3 lives. There are four of them. To find with them player can eat one of the 4 "tabletka", by doing it, player will temporarily gain ability to kill ghost, by contacting with them, after short period of time ghost will respawn in their starting point.
 
-To score points player can:
- - eat tabletkas - 50 points
+To gain points player can:
+ - eat tabletka - 50 points
  - kill ghost - 200 points
- - collect dots from map - 10 points
+ - collect dot from map - 10 points
  
  # Enviroment
  In this code [Pacman](https://www.gymlibrary.dev/environments/atari/ms_pacman/) from OpenAi gym was used, with atari space, in this environment gym allows to pass action from neuron network directly to enviroment.
