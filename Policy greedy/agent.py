@@ -7,7 +7,7 @@ from tensorflow.keras.models import load_model
 
 
 class PolicyGradientAgent:
-    def __init__(self, state_shape, action_size, learning_rate=0.01, discount_factor=0.99, batch_size=32, epsilon=0.0):
+    def __init__(self, state_shape, action_size, learning_rate=0.01, discount_factor=0.99, batch_size=32, epsilon=0.2):
         self.state_shape = state_shape
         self.action_size = action_size
         self.learning_rate = learning_rate
@@ -49,24 +49,16 @@ class PolicyGradientAgent:
             discounted_rewards[t] = cumulative_reward
         return discounted_rewards
 
-    def train(self):
-        num_batches = len(self.states) // self.batch_size
-        indices = np.arange(len(self.states))
+    def train(self, state, action, rewardsss, next_state, done):
 
-        for _ in range(num_batches):
-            batch_indices = np.random.choice(indices, size=self.batch_size, replace=False)
-            batch_states = np.vstack([self.states[i] for i in batch_indices])
-            batch_actions = np.array([self.actions[i] for i in batch_indices])
-            batch_discounted_rewards = self.discount_rewards()[batch_indices]
+        action_masks = tf.one_hot(action, self.action_size)
 
-            action_masks = tf.one_hot(batch_actions, self.action_size)
+        with tf.GradientTape() as tape:
+            logits = self.model(state, training=True)
+            loss = tf.reduce_mean(-tf.math.log(tf.reduce_sum(action_masks * logits, axis=1)) * batch_discounted_rewards)
 
-            with tf.GradientTape() as tape:
-                logits = self.model(batch_states, training=True)
-                loss = tf.reduce_mean(-tf.math.log(tf.reduce_sum(action_masks * logits, axis=1)) * batch_discounted_rewards)
-
-            gradients = tape.gradient(loss, self.model.trainable_variables)
-            self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
+        radients = tape.gradient(loss, self.model.trainable_variables)
+        self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
 
         self.states = []
         self.actions = []
@@ -74,7 +66,7 @@ class PolicyGradientAgent:
 
 
     def save_model(self):
-        self.model.save("A2CModel.h")
+        self.model.save("PolicyGreedy_Model.h")
 
     def load_model(self):
-        self.model = load_model("A2CModel.h")
+        self.model = load_model("PolicyGreedy_Model.h")

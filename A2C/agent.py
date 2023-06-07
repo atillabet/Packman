@@ -45,7 +45,7 @@ class Critic(tf.keras.Model):
 
 
 class A2CAgent:
-    def __init__(self, state_shape, action_size, actor_lr=5e-6, critic_lr=5e-6, gamma=0.90, epsilon=0.2, max_consecutive_actions=5, penalty_factor=10):
+    def __init__(self, state_shape, action_size, actor_lr=0.0001, critic_lr=0.0001, gamma=0.90, epsilon=0.2, max_consecutive_actions=7, penalty_factor=0):
         self.state_shape = state_shape
         self.action_size = action_size
         self.actor_lr = actor_lr
@@ -116,19 +116,19 @@ class A2CAgent:
         self.critic_optimizer.apply_gradients(zip(grads2, self.critic.trainable_variables))
 
     def save_model(self):
-        self.actor.save("A2CActor1.h")
-        self.critic.save("A2CCritic1.h")
+        self.actor.save("A2CActor4.h")
+        self.critic.save("A2CCritic4.h")
         optimizer_weights = self.actor_optimizer.get_weights()
         np.savez('actor_weights.npz', optimizer_weights=optimizer_weights)
         optimizer_weights = self.critic_optimizer.get_weights()
         np.savez('critic_weights.npz', optimizer_weights=optimizer_weights)
 
     def load_model(self):
-        self.actor = load_model("A2CActor1.h")
-        self.critic = load_model("A2CCritic1.h")
+        self.actor = load_model("A2CActor3.h")
+        self.critic = load_model("A2CCritic3h")
         loaded_weights = np.load('actor_weights.npz', allow_pickle=True)
         optimizer_weights = loaded_weights['optimizer_weights'].astype(object)
-        self.actor_optimizer.set_weights(optimizer_weights)
+        # self.actor_optimizer.set_weights(optimizer_weights)
         loaded_weights = np.load('critic_weights.npz', allow_pickle=True)
         optimizer_weights = loaded_weights['optimizer_weights'].astype(object)
-        self.critic_optimizer.set_weights(optimizer_weights)
+        # self.critic_optimizer.set_weights(optimizer_weights)
