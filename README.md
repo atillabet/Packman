@@ -20,21 +20,30 @@ To use gym with atari space its necessary to use [atari license](https://pypi.or
 In this code all models contains same neuron network. All models contains methods:
  - get_action - this function will return predicted action for specific state
  - train - this function will train network by using results of code
+ - update_memory - this function will update memory by new states
  - load_model - it will load network from folder
  - save_model - it will save network from folder
 
 Rewards returned from gym enviroment are modified in order to improve learning, because if you use stardart rewards model going to just try to kill one ghost and then will stop playing.
 
 # How to run it
-In order to run program you should just run play.py from model you pick.
-
-If you want to train model comment following line:
+Firstly you need to clone git repo using
 ````
-agent.load_model()
+git clone https://github.com/atillabet/Packman.git
 ````
-To test model uncomment it and to visualisy game you should uncomment this line:
+Then install all necessary dependencies using
 ````
-env.render()
+pip install -r requirements.txt
+````
+To lunch model throw console you should go to specific model folder and run following command:
+````
+python train.py --output-file Model1.h --input-file Model2.h
+````
+- output-file parameter corresponds to file where model will be stored.
+- input-file is optional parameter and can be used to download pre-treined model to train.
+To lunch test model you should run next command
+````
+python test.py --input-file Model2.h
 ````
 
 # Cuda 
