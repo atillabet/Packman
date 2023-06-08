@@ -22,7 +22,7 @@ class DQNAgent:
         self.action_size = action_size
         self.memory = deque(maxlen=50_000)  # Memory buffer to store experience tuples
         self.gamma = 0.95  # Discount factor for future rewards
-        self.epsilon = 0.0  # Exploration rate
+        self.epsilon = 0.4  # Exploration rate
         self.epsilon_decay = 0.999  # Decay rate for exploration rate
         self.epsilon_min = 0.01  # Minimum exploration rate
         self.learning_rate = 0.0001  # Learning rate for the model
