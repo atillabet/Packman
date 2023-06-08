@@ -1,3 +1,9 @@
+import os
+import argparse
+
+# Set TensorFlow environment variable to suppress warning messages
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
 import argparse
 import gym
 import numpy as np

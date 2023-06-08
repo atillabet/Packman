@@ -44,13 +44,6 @@ for i in range(len(moves)):
 
 moves.append(-2)
 
-
-# Function to check if all elements in a deque are the same
-def are_all_elements_same(deque_):
-    lst = list(deque_)
-    return all(elem == lst[0] for elem in lst)
-
-
 # Start training episodes
 for episode in range(num_episodes):
     state = env.reset()
@@ -82,9 +75,6 @@ for episode in range(num_episodes):
 
         # Append the current action to the moves deque
         moves.append(action)
-        # Penalize if all recent actions are the same
-        if are_all_elements_same(moves):
-            rewardsss -= 10
 
         # Penalize if the Pacman position remains the same and the action is not no-op
         pacman_position_current = np.argwhere(state == 210)[0]
@@ -97,10 +87,6 @@ for episode in range(num_episodes):
         state = next_state
         total_reward += reward
 
-        # Perform a replay update if memory size is sufficient
-        if len(agent.memory) > batch_size:
-            agent.train(batch_size)
-
         if counter % 10 == 0:
             print(" score: ", total_reward, info, action)
         counter += 1
@@ -109,7 +95,7 @@ for episode in range(num_episodes):
 
     # Perform a replay update at the end of the episode if memory size is sufficient
     if len(agent.memory) > batch_size:
-        agent.replay(batch_size)
+        agent.train(batch_size)
 
     # Save the model every 10 episodes
     if episode % 10 == 0:

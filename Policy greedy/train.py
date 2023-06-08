@@ -29,7 +29,7 @@ for episode in range(num_episodes):
     prev_lives = 3
     dots = 0
     while not done:
-        # env.render()
+        env.render()
         state = np.array(state)
 
         action = agent.get_action(state)
